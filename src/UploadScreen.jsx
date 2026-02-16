@@ -1,11 +1,5 @@
 import { useState, useRef } from 'react'
-
-const C = {
-  bg: '#0f1117', card: '#181b24', border: '#2a2e3b',
-  accent: '#c8a455', accentGlow: 'rgba(200,164,85,0.15)',
-  text: '#e8e6e1', textDim: '#8b8d95', textMuted: '#5a5c64',
-  green: '#4ade80', red: '#e05252', blue: '#60a5fa'
-}
+import { OWU as C } from './theme'
 
 const EVENT_TYPES = [
   { id: 'homecoming', label: 'Homecoming & Family Weekend', available: true },
@@ -97,14 +91,14 @@ export default function UploadScreen({ onAnalyze, loading, error }) {
         <div style={{ textAlign: 'center', marginBottom: 32 }}>
           <div style={{
             width: 64, height: 64, borderRadius: 16, margin: '0 auto 20px',
-            background: `linear-gradient(135deg, ${C.accent}, ${C.accent}88)`,
+            background: `linear-gradient(135deg, ${C.cardinal}, ${C.cardinalDark})`,
             display: 'flex', alignItems: 'center', justifyContent: 'center',
-            fontSize: 28, fontWeight: 700, color: C.bg,
-            fontFamily: "'DM Serif Display', Georgia, serif"
+            fontSize: 28, fontWeight: 700, color: '#fff',
+            fontFamily: "'Source Sans 3', 'Source Sans Pro', sans-serif"
           }}>W</div>
           <h1 style={{
             fontSize: 32, fontWeight: 700, margin: '0 0 8px',
-            fontFamily: "'DM Serif Display', Georgia, serif",
+            fontFamily: "'Source Sans 3', 'Source Sans Pro', sans-serif",
             color: C.text
           }}>
             OWU Alumni Analytics
@@ -193,12 +187,12 @@ export default function UploadScreen({ onAnalyze, loading, error }) {
           style={{
             width: '100%', padding: '16px 32px', borderRadius: 12,
             border: 'none', fontSize: 16, fontWeight: 600,
-            fontFamily: "'DM Sans', sans-serif",
+            fontFamily: "'Source Sans 3', 'Source Sans Pro', sans-serif",
             cursor: file1 && !loading ? 'pointer' : 'not-allowed',
             background: file1
-              ? `linear-gradient(135deg, ${C.accent}, ${C.accent}cc)`
+              ? `linear-gradient(135deg, ${C.cardinal}, ${C.cardinalDark})`
               : C.border,
-            color: file1 ? C.bg : C.textMuted,
+            color: file1 ? '#fff' : C.textMuted,
             transition: 'all 0.2s',
             opacity: loading ? 0.7 : 1,
           }}

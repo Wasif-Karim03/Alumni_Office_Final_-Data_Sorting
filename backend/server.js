@@ -17,15 +17,17 @@ const PORT = process.env.PORT || 3001;
 const allowedOrigins = process.env.FRONTEND_URL
   ? [process.env.FRONTEND_URL, 'http://localhost:5173']
   : ['http://localhost:5173'];
-app.use(
-  cors({
-    origin: (origin, cb) => {
-      if (!origin || allowedOrigins.includes(origin)) return cb(null, true);
-      cb(null, false);
-    },
-    optionsSuccessStatus: 200,
-  })
-);
+// Also allow *.vercel.app for preview deployments
+const corsOptions = {
+  origin: (origin, cb) => {
+    if (!origin) return cb(null, true);
+    if (allowedOrigins.includes(origin)) return cb(null, true);
+    if (origin.endsWith('.vercel.app')) return cb(null, true);
+    cb(null, false);
+  },
+  optionsSuccessStatus: 200,
+};
+app.use(cors(corsOptions));
 
 app.use(express.json());
 

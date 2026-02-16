@@ -4,19 +4,10 @@ import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip,
   ResponsiveContainer, PieChart, Pie, Cell, LineChart, Line, Legend
 } from 'recharts'
-
-// ─── Theme ─────────────────────────────────────────────────
-
-const C = {
-  bg: '#0f1117', card: '#181b24', border: '#2a2e3b',
-  accent: '#c8a455', accentDim: '#a08535', accentGlow: 'rgba(200,164,85,0.15)',
-  text: '#e8e6e1', textDim: '#8b8d95', textMuted: '#5a5c64',
-  red: '#e05252', green: '#4ade80', blue: '#60a5fa', purple: '#a78bfa',
-  orange: '#fb923c', teal: '#2dd4bf', pink: '#f472b6', indigo: '#818cf8',
-}
+import { OWU as C } from './theme'
 
 const CAT_COLORS = {
-  General: C.accent, Family: C.blue, Academic: C.green,
+  General: C.cardinal, Family: C.blue, Academic: C.green,
   Athletics: C.pink, Greek: C.purple, 'Invite-Only': C.orange
 }
 
@@ -30,20 +21,20 @@ const fmtN = (n) => Number(n).toLocaleString()
 
 // ─── Reusable Components ───────────────────────────────────
 
-const StatCard = ({ label, value, sub, color = C.accent }) => (
+const StatCard = ({ label, value, sub, color = C.cardinal }) => (
   <div style={{
     background: C.card, border: `1px solid ${C.border}`, borderRadius: 12,
     padding: '20px 24px', display: 'flex', flexDirection: 'column', gap: 4
   }}>
     <span style={{ fontSize: 12, color: C.textDim, textTransform: 'uppercase', letterSpacing: 1.5, fontWeight: 500 }}>{label}</span>
-    <span style={{ fontSize: 30, fontWeight: 700, color, fontFamily: "'DM Serif Display', Georgia, serif", lineHeight: 1.1 }}>{value}</span>
+    <span style={{ fontSize: 30, fontWeight: 700, color, fontFamily: "'Source Sans 3', 'Source Sans Pro', sans-serif", lineHeight: 1.1 }}>{value}</span>
     {sub && <span style={{ fontSize: 13, color: C.textMuted }}>{sub}</span>}
   </div>
 )
 
 const SectionTitle = ({ children, sub }) => (
   <div style={{ marginBottom: 16, marginTop: 8 }}>
-    <h3 style={{ fontSize: 18, fontWeight: 700, color: C.text, margin: 0, fontFamily: "'DM Serif Display', Georgia, serif" }}>{children}</h3>
+    <h3 style={{ fontSize: 18, fontWeight: 700, color: C.text, margin: 0, fontFamily: "'Source Sans 3', 'Source Sans Pro', sans-serif" }}>{children}</h3>
     {sub && <p style={{ fontSize: 13, color: C.textDim, margin: '4px 0 0' }}>{sub}</p>}
   </div>
 )
@@ -58,7 +49,7 @@ const ChartCard = ({ children, title, sub, style: s }) => (
 const CustomTooltip = ({ active, payload, label }) => {
   if (!active || !payload?.length) return null
   return (
-    <div style={{ background: '#1e2230', border: `1px solid ${C.border}`, borderRadius: 8, padding: '10px 14px', fontSize: 13 }}>
+    <div style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: 8, padding: '10px 14px', fontSize: 13, boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}>
       <div style={{ color: C.text, fontWeight: 600, marginBottom: 4 }}>{label}</div>
       {payload.map((p, i) => (
         <div key={i} style={{ color: p.color || C.accent, fontSize: 12 }}>
@@ -162,7 +153,7 @@ function OverviewTab({ s24, s25, cross, hasRE }) {
             {monthData.map(([month, count]) => (
               <div key={month} style={{ flex: 1, background: C.bg, borderRadius: 8, padding: 16 }}>
                 <div style={{ fontSize: 12, color: C.textDim, marginBottom: 4 }}>{month}</div>
-                <div style={{ fontSize: 28, fontWeight: 700, color: C.accent, fontFamily: "'DM Serif Display', Georgia, serif" }}>{count}</div>
+                <div style={{ fontSize: 28, fontWeight: 700, color: C.accent, fontFamily: "'Source Sans 3', 'Source Sans Pro', sans-serif" }}>{count}</div>
                 <div style={{ height: 4, background: C.border, borderRadius: 2, marginTop: 8 }}>
                   <div style={{ height: '100%', width: `${(count / monthTotal * 100)}%`, background: C.accent, borderRadius: 2 }} />
                 </div>
@@ -199,7 +190,7 @@ function ConstituencyTab({ s24, s25, cross, hasRE }) {
           alignItems: 'center',
           gap: 24,
         }}>
-          <div style={{ fontSize: 36, fontWeight: 700, color: C.accent, fontFamily: "'DM Serif Display', Georgia, serif" }}>
+          <div style={{ fontSize: 36, fontWeight: 700, color: C.accent, fontFamily: "'Source Sans 3', 'Source Sans Pro', sans-serif" }}>
             {fmtN(totalAlumni)}
           </div>
           <div>
@@ -297,7 +288,7 @@ function EventsTab({ s25 }) {
           ).sort((a, b) => b[1].total - a[1].total).map(([cat, v]) => (
             <div key={cat} style={{ background: C.bg, borderRadius: 8, padding: 14, borderLeft: `3px solid ${CAT_COLORS[cat] || C.accent}` }}>
               <div style={{ fontSize: 11, color: CAT_COLORS[cat] || C.accent, fontWeight: 600, textTransform: 'uppercase', letterSpacing: 1 }}>{cat}</div>
-              <div style={{ fontSize: 22, fontWeight: 700, color: C.text, marginTop: 4, fontFamily: "'DM Serif Display', Georgia, serif" }}>{v.total}</div>
+              <div style={{ fontSize: 22, fontWeight: 700, color: C.text, marginTop: 4, fontFamily: "'Source Sans 3', 'Source Sans Pro', sans-serif" }}>{v.total}</div>
               <div style={{ fontSize: 11, color: C.textMuted }}>{v.count} events · avg {Math.round(v.total / v.count)}</div>
             </div>
           ))}
@@ -528,7 +519,7 @@ function CrossSourceMatchTab({ s24, s25, cross, hasRE }) {
               border: `2px solid ${C.accent}`,
               display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'
             }}>
-              <div style={{ fontSize: 32, fontWeight: 700, color: C.accent, fontFamily: "'DM Serif Display', Georgia, serif" }}>{s25.total}</div>
+              <div style={{ fontSize: 32, fontWeight: 700, color: C.accent, fontFamily: "'Source Sans 3', 'Source Sans Pro', sans-serif" }}>{s25.total}</div>
               <div style={{ fontSize: 12, color: C.textDim }}>Total Attendees</div>
               <div style={{ fontSize: 11, color: C.textMuted }}>(AlumniEvent)</div>
             </div>
@@ -673,7 +664,7 @@ function InsightsTab({ insights }) {
           <div key={l} style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: 10, padding: '14px 18px', display: 'flex', alignItems: 'center', gap: 12 }}>
             <div style={{ width: 8, height: 8, borderRadius: '50%', background: clr }} />
             <span style={{ fontSize: 13, color: C.textDim }}>{l}</span>
-            <span style={{ fontSize: 20, fontWeight: 700, color: clr, marginLeft: 'auto', fontFamily: "'DM Serif Display', Georgia, serif" }}>{c}</span>
+            <span style={{ fontSize: 20, fontWeight: 700, color: clr, marginLeft: 'auto', fontFamily: "'Source Sans 3', 'Source Sans Pro', sans-serif" }}>{c}</span>
           </div>
         ))}
       </div>
@@ -870,18 +861,18 @@ export default function Dashboard({ data, fileNames, onReset }) {
   }
 
   return (
-    <div style={{ background: C.bg, minHeight: '100vh', color: C.text, fontFamily: "'DM Sans', 'Segoe UI', sans-serif" }}>
+    <div style={{ background: C.bg, minHeight: '100vh', color: C.text, fontFamily: "'Source Sans 3', 'Source Sans Pro', 'Segoe UI', sans-serif" }}>
       {/* Header */}
       <div style={{ borderBottom: `1px solid ${C.border}`, padding: '16px 32px' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
           <div style={{
             width: 40, height: 40, borderRadius: 10,
-            background: `linear-gradient(135deg, ${C.accent}, ${C.accentDim})`,
+            background: `linear-gradient(135deg, ${C.cardinal}, ${C.cardinalDark})`,
             display: 'flex', alignItems: 'center', justifyContent: 'center',
-            fontSize: 18, fontWeight: 700, color: C.bg
+            fontSize: 18, fontWeight: 700, color: '#fff'
           }}>W</div>
           <div>
-            <h1 style={{ fontSize: 20, fontWeight: 700, margin: 0, fontFamily: "'DM Serif Display', Georgia, serif" }}>
+            <h1 style={{ fontSize: 20, fontWeight: 700, margin: 0, fontFamily: "'Source Sans 3', 'Source Sans Pro', sans-serif" }}>
               OWU Alumni Analytics
             </h1>
             <p style={{ fontSize: 12, color: C.textDim, margin: 0 }}>
@@ -932,7 +923,7 @@ export default function Dashboard({ data, fileNames, onReset }) {
               textAlign: 'left', display: 'flex', alignItems: 'center', gap: 10,
               transition: 'all 0.15s',
               borderLeft: activeTab === tab.id ? `2px solid ${C.accent}` : '2px solid transparent',
-              fontFamily: "'DM Sans', sans-serif",
+              fontFamily: "'Source Sans 3', 'Source Sans Pro', sans-serif",
             }}>
               <span style={{ fontSize: 14 }}>{tab.icon}</span> {tab.label}
             </button>

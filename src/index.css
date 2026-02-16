@@ -5,9 +5,9 @@
 }
 
 body {
-  font-family: 'DM Sans', 'Segoe UI', sans-serif;
-  background: #0f1117;
-  color: #e8e6e1;
+  font-family: 'Source Sans 3', 'Source Sans Pro', 'Segoe UI', sans-serif;
+  background: #f5f6f7;
+  color: #111c24;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -15,12 +15,12 @@ body {
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #181b24;
+  background: #e9eaea;
 }
 ::-webkit-scrollbar-thumb {
-  background: #2a2e3b;
+  background: #d2d3d3;
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #3a3e4b;
+  background: #777777;
 }
