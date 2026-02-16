@@ -1,0 +1,14 @@
+# Render.com Blueprint (optional) - deploy backend API
+# Place this at repo root. Or configure manually per DEPLOYMENT.md
+services:
+  - type: web
+    name: owu-analytics-api
+    runtime: node
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: FRONTEND_URL
+        sync: false
